@@ -21,14 +21,43 @@ public class JpaApplication {
     @Bean
     public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
         return runner -> {
-//            createStudent(studentDAO);
+            createStudent(studentDAO);
 
 //            readStudent(studentDAO);
 
 //            queryForStudent(studentDAO);
 
-            queryForStudentByLastName(studentDAO);
+//            queryForStudentByLastName(studentDAO);
+
+//            updateStudent(studentDAO);
+
+//            deleteStudent(studentDAO);
         };
+
+    }
+
+    private void deleteStudent(StudentDAO studentDAO) {
+
+        int studentId = 3;
+        System.out.println("Deleting ID 3");
+        studentDAO.delete(3);
+    }
+
+    private void updateStudent(StudentDAO studentDAO) {
+        // retrieve student based on id
+        int studentId = 1;
+        System.out.println("Getting Student with id: " + studentId);
+        Student myStudent = studentDAO.findById(studentId);
+
+        //change firstname to Scooby
+        System.out.println("updating student");
+        myStudent.setFirstName("HUAFANG");
+
+        //update the student
+        studentDAO.update(myStudent);
+
+        //display the updated student
+        System.out.println("Updated student: " + myStudent);
     }
 
     private void queryForStudentByLastName(StudentDAO studentDAO) {
